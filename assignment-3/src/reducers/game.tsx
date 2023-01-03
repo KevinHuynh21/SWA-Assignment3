@@ -32,6 +32,11 @@ export default function (state = initialState, action: Action) {
             points: payload.score,
             completed: payload.completed || false,
         }
+        case UPDATE_GAMES:
+            return {
+                ...state,
+                games: payload.games,
+            }
         case ORIGINAL_ITEM_CHOSEN: 
         return {
             ...state,
@@ -44,16 +49,6 @@ export default function (state = initialState, action: Action) {
             currentMove: state.currentMove += 1,
             originalItem: null,
         }
-        case END_GAME:
-            return {
-                ...state,
-                completed: true,
-            }
-        case UPDATE_GAMES:
-            return {
-                ...state,
-                games: payload.games,
-            }
         case EMPTY_CHOSEN:
             return {
                 ...state,
@@ -74,6 +69,11 @@ export default function (state = initialState, action: Action) {
             return {
                 ...state,
                 points: state.points += payload.point
+            }
+        case END_GAME:
+            return {
+                ...state,
+                completed: true,
             }
     default:
       return state;

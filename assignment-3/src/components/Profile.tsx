@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 import { MESSAGE_WAS_A_SUCCESS } from "../actions/types";
 import { Navigate } from "react-router-dom";
-import { clearMessage } from "../actions/message";
+import { emptyMessage } from "../actions/message";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const Profile = () => {
 
   const handleSave = () => {
     setInvalidPassword(false);
-    dispatch((clearMessage()));
+    dispatch((emptyMessage()));
 
     // More save to have this kind of validation on serverside instead of having user password in state
     if (oldPassword !== user.password) {

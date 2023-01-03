@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { MESSAGE_WAS_A_SUCCESS } from '../actions/types';
 import { Navigate } from 'react-router-dom';
-import { clearMessage } from "../actions/message";
+import { emptyMessage } from "../actions/message";
 import { login } from "../actions/auth";
 import { useState } from "react";
 
@@ -51,7 +51,7 @@ const validatePassword = (e: any) => {
   setInvalidPassword(false);
 }
 const handleLogin = () => {
-  dispatch((clearMessage()));
+  dispatch((emptyMessage()));
   dispatch((login(username, password)) as any)
 };
 

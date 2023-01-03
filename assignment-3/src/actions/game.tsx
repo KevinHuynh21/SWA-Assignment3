@@ -39,25 +39,6 @@ export const createBoard = (userId: number, gameId: any) => (dispatch: any) => {
     });
 }
 
-export const getAllGames = () => (dispatch: any) => {
-    getGames().then((result) => {
-        dispatch({
-            type: UPDATE_GAMES,
-            payload: {
-                games: result.data,
-            }
-        })
-    }).catch((err) => {
-        dispatch({
-            type: UPDATE_MESSAGE,
-            payload: {
-                message: err.message,
-                type: MESSAGE_FAIL_ERROR,
-            },
-        })
-    });
-}
-
 export const getCurrentlySavedGame = (gameId: number) => (dispatch: any) => {
     getGame(gameId).then((game) => {
         const colourGenerator = new RandomColorGenerator();
@@ -84,15 +65,25 @@ export const getCurrentlySavedGame = (gameId: number) => (dispatch: any) => {
     });
 }
 
-export const endGame = (gameId: number) => (dispach: any) => {
-    updateGame(gameId, {
-        completed: true,
+export const getAllGames = () => (dispatch: any) => {
+    getGames().then((result) => {
+        dispatch({
+            type: UPDATE_GAMES,
+            payload: {
+                games: result.data,
+            }
+        })
+    }).catch((err) => {
+        dispatch({
+            type: UPDATE_MESSAGE,
+            payload: {
+                message: err.message,
+                type: MESSAGE_FAIL_ERROR,
+            },
+        })
     });
-
-    dispach({
-        type: END_GAME,
-    })
 }
+
 
 export const emptyCurrentGame = (gameId: number) => (dispach: any) => {
     emptyCurrent();
@@ -113,15 +104,6 @@ export const chooseOriginalItem = (item: any, gameId: number) => (dispach: any) 
     })
 }
 
-export const emptyChosen = (gameId: number) => (dispatch: any) => {
-    updateGame(gameId, {
-        originalItemChosen: null,
-    });
-
-    dispatch({
-        type: EMPTY_CHOSEN,
-    });
-}
 
 export const chooseNewItem = (board: any, colourGenerator: any, originalItem: any, newItem: any, gameId: number, points: number, currentMove: number) => (dispach: any) => {
     // Check move possiblity before save in state
@@ -159,5 +141,25 @@ export const chooseNewItem = (board: any, colourGenerator: any, originalItem: an
         payload: {
             board: result.board
         }
+    })
+}
+
+export const emptyChosen = (gameId: number) => (dispatch: any) => {
+    updateGame(gameId, {
+        originalItemChosen: null,
+    });
+
+    dispatch({
+        type: EMPTY_CHOSEN,
+    });
+}
+
+export const endGame = (gameId: number) => (dispach: any) => {
+    updateGame(gameId, {
+        completed: true,
+    });
+
+    dispach({
+        type: END_GAME,
     })
 }

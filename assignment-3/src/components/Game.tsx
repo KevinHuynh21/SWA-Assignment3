@@ -31,13 +31,14 @@ const Game = () => {
         dispatch((createBoard(user.userId, gameId)) as any)
     };
 
+    const doEmptyBoard = () => {
+        dispatch(emptyCurrentGame(gameId) as any)
+    }
+
     const doEmptyChosen = () => {
         dispatch((emptyChosen(gameId)) as any)
     }
 
-    const doEmptyBoard = () => {
-        dispatch(emptyCurrentGame(gameId) as any)
-    }
 
     const doChosenItem = (item: any) => {
         if(completed) {
@@ -52,11 +53,6 @@ const Game = () => {
         dispatch((chooseNewItem(board, colourGenerator, originalItem, item, gameId, points, currentMove)) as any)
     }
 
-    const isSelectedElement = (item: any) => {
-        if (originalItem?.position.col === item.position.col && originalItem?.position.row === item.position.row) {
-            return true;
-        }
-    }
     const createRow = (items: any[]) => {
         const rowToDisaply = [];
 
@@ -74,6 +70,13 @@ const Game = () => {
         }
         return rowToDisaply;
     }
+
+    const isSelectedElement = (item: any) => {
+        if (originalItem?.position.col === item.position.col && originalItem?.position.row === item.position.row) {
+            return true;
+        }
+    }
+    
 
     const makeBoard = () => {
         if(!board) {

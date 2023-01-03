@@ -11,7 +11,7 @@ import Leaderboard from "./components/Leaderboard";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import SignUp from "./components/SignUp";
-import { clearMessage } from "./actions/message";
+import { emptyMessage } from "./actions/message";
 import { logout } from "./actions/auth";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
   let location = useLocation();
 
   useEffect(() => {
-    dispatch(clearMessage());
+    dispatch(emptyMessage());
   }, [dispatch, location])
 
   const logOut = useCallback(() => {
