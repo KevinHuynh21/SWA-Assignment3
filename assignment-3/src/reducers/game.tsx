@@ -12,7 +12,7 @@ interface Action {
 const initialState = {
     points: 0,
     currentMove: 0,
-    maxMoves: 10,
+    maxMoves: 7,
     completed: false,
     gameId,
 };
