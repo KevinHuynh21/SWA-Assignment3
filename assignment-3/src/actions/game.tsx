@@ -118,7 +118,7 @@ export const chooseNewItem = (board: any, colourGenerator: any, originalItem: an
 
     let score = 0;
     matches.forEach(() => {
-        return score += 10;
+        return score += 17;
     })
 
     updateGame(gameId, {

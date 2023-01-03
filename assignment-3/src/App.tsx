@@ -7,12 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Game from "./components/Game";
 import Home from "./components/Home";
-import Leaderboard from "./components/Leaderboard";
+import Scores from "./components/Scores";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import SignUp from "./components/SignUp";
 import { emptyMessage } from "./actions/message";
-import { logout } from "./actions/auth";
 
 const App = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -24,15 +23,11 @@ const App = () => {
     dispatch(emptyMessage());
   }, [dispatch, location])
 
-  const logOut = useCallback(() => {
-    dispatch((logout() as any));
-  }, [dispatch]);
-
   return (
     <div className="h-100">
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand">
         {isLoggedIn ? (
-          <div className="navbar-nav ml-auto">
+          <div className="navbar-nav">
             <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
                 Profile
@@ -44,15 +39,11 @@ const App = () => {
                 </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/leaderboard"} className="nav-link">
-                Leaderboard
+              <Link to={"/scores"} className="nav-link">
+                Scores
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link" onClick={logOut}>
-                Logout
-              </Link>
-            </li>
+      
           </div>
         ) : (
           <div className="navbar-nav ml-auto">
@@ -78,7 +69,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/game" element={<Game />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/scores" element={<Scores />} />
         </Routes>
       </div>
 

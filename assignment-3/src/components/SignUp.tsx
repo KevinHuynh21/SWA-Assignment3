@@ -57,63 +57,46 @@ const SignUp = () => {
 
 
      return (
-        <div className="col-md-4 mx-auto h-100">
-        <div className="card card-container p-4 my-auto">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            width="100"
-            height="100"
-            className="profile-img-card rounded mx-auto mb-4 mt-4"
-          />
-  
+        <div className="main">
             {(
-              <div>
-                <div className="form-group mt-2">
+              <div className="containerr">
+                  <h4>Sign Up</h4>
                   <label htmlFor="username">Username</label>
                   <input
                     type="text"
-                    className="form-control"
                     name="username"
                     value={username}
                     onChange={onChangeUsername}
                   />
-                </div>
 
-                {invalidUsername && username.length > 0 && (
-                  <div className="text-danger">Username should be between 3 - 12</div>
-                )}
-  
-                <div className="form-group mt-2">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
-                    className="form-control"
                     name="password"
                     value={password}
                     onChange={onChangePassword}
                   />
-                </div>
+
 
                 {invalidPassword && password.length > 0 && (
-                  <div className="text-danger">Password should be between 3 - 12</div>
+                  <div className="text-danger">Password should be between 3 - 12 letters</div>
                 )}
   
-                <div className="form-group mt-4">
-                  <button disabled={invalidPassword || invalidUsername} onClick={handlecreateAccount} className="btn btn-primary btn-block w-100">Sign Up</button>
+                <div className="containerr">
+                  <button className="btn btn-primary" onClick={handlecreateAccount} >Sign Up</button>
                 </div>
               </div>
             )}
 
             {message && (
-              <div className="form-group mt-4">
+              <div className="containerr">
                 <div className={type === MESSAGE_WAS_A_SUCCESS ? 'alert alert-success' : 'alert alert-danger'} role="alert">
                   <div>{message}</div>
                 </div>
               </div>
             )}
         </div>
-      </div>
+
     );
 };
   

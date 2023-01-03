@@ -63,10 +63,10 @@ const Game = () => {
             };
 
             if (isSelectedElement(items[i])) {
-                selectedStyle = `board-item-selected`;
+                selectedStyle = `tilePiece-selected`;
             }
 
-            rowToDisaply.push(<td onClick={() => doChosenItem({ ...items[i]})} key={i} className={"board-item " + selectedStyle} style={style}></td>)
+            rowToDisaply.push(<td onClick={() => doChosenItem({ ...items[i]})} key={i} className={"tilePiece" + selectedStyle} style={style}></td>)
         }
         return rowToDisaply;
     }
@@ -99,13 +99,16 @@ const Game = () => {
 
     return (
         <div>
+            <div className='text-center'>
+            <h4>Game</h4>
             {!board && (
-            <div className='w-100 text-center mt-4 pt-4'>
-                <button className='btn btn-primary m-2' onClick={() => doCreateBoard()}>Generate board</button>
+            <div className='text-center'>
+                <button className='btn btn-primary' onClick={() => doCreateBoard()}>Generate game</button>
             </div>
             )}
-            {board && (<div className='title mt-3'>Points {points}</div>)}
-            {board && (<div className='title mt-3'>Moves left: {maxMoves - currentMove}</div>)}
+            {board && (<div>Score: {points}</div>)}
+            {board && (<div>Remaining moves: {maxMoves - currentMove}</div>)}
+            <button className='btn btn-primary' onClick={() => doCreateBoard()}>Reset game</button>
             <div className='mt-3 w-100'>
                     <table className='mx-auto position-relative'>
                         <tbody>
@@ -113,22 +116,23 @@ const Game = () => {
                         </tbody>
 
                     {completed && (
-                        <div className='overlay'>
-                            <div>GAME FINISHED. YOUR SCORE: {points}</div>
+                        <div className="endgame">
+                            <div>Oops! You ran out of moves. Score: {points}</div>
                             <div>
-                            <button onClick={() => {doEmptyBoard(); doCreateBoard()}} className='w-100 mt-2 text-center mx-auto btn btn-primary'>Again</button>    
+                            <button onClick={() => {doEmptyBoard(); doCreateBoard()}} className='btn btn-primary'>Try again</button>    
                             </div>
                         </div>
                     )}
                     </table>
             </div>
-            <div className='w-100 text-center'>
-            {originalItem && (<button className='btn btn-primary m-2' onClick={doEmptyChosen}>Clear selection</button>)}
+            <div className='text-center'>
+            {originalItem && (<button className='btn btn-secondary' onClick={doEmptyChosen}>Reset move</button>)}
             </div>
             {message && (<div>
                 {message}
             </div>)}
             </div>
+        </div>
     );
 }
 

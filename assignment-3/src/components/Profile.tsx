@@ -1,10 +1,11 @@
 import {getUser, updateUserData} from "../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import { MESSAGE_WAS_A_SUCCESS } from "../actions/types";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { emptyMessage } from "../actions/message";
+import { logout } from "../actions/auth";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,10 @@ const Profile = () => {
 
   if (!isLoggedIn) {
     return <Navigate to="/login" />;
+  }
+
+  const Logout = ()=>{
+    dispatch((logout() as any));
   }
 
   const onChangeNewPassword = (e: any) => {
@@ -58,69 +63,66 @@ const Profile = () => {
   }
 
   return (
-      <div className="col-md-4 mx-auto h-100">
-        <div className="card card-container p-4 my-auto">
-        <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            width="100"
-            height="100"
-            className="profile-img-card rounded mx-auto mb-4 mt-4"
-          />
+
+        <div>
           {(
-              <div>
-                <div className="form-group mt-2">
+              <div >
+                <div className="containerr">
                   <label htmlFor="username">Username</label>
                   <input
                       disabled
                       type="text"
-                      className="form-control"
                       name="username"
                       value={username || ``}
                   />
                 </div>
 
-                <div className="form-group mt-2">
+                <div className="containerr">
                   <label htmlFor="password">Old password</label>
                   <input
                       type="password"
-                      className="form-control"
                       name="password"
                       value={oldPassword || ``}
                       onChange={onChangeOldPassword}
                   />
                 </div>
 
-                <div className="form-group mt-2">
+                <div className="containerr">
                   <label htmlFor="password">New password</label>
                   <input
                       type="password"
-                      className="form-control"
                       name="password"
                       value={newPassword || ``}
                       onChange={onChangeNewPassword}
                   />
                 </div>
 
-                <div className="form-group mt-4">
-                  <button onClick={handleSave} className="btn btn-primary btn-block w-100">Save</button>
+                <div className="containerr">
+                  <button onClick={handleSave} className="btn btn-primary">Save changes</button>
                 </div>
 
+                <div className="containerr">
+                  <button onClick={Logout} className="btn btn-primary">
+                  <Link to={"/login"} className="nav-link" onClick={Logout}>
+                    Logout
+                  </Link></button>
+                </div>
+
+
                 {invalidPassword && (
-                  <div className="alert alert-danger mt-4" role="alert">Old password is incorrect!</div>
+                  <div className="alert alert-danger" role="alert">Old password is incorrect!</div>
                 )}
               </div>
           )}
 
           {message && (
-              <div className="form-group mt-4">
+              <div className="containerr">
                 <div className={type === MESSAGE_WAS_A_SUCCESS ? 'alert alert-success' : 'alert alert-danger'} role="alert">
                   <div>{message}</div>
                 </div>
               </div>
           )}
         </div>
-      </div>
   );
 };
 

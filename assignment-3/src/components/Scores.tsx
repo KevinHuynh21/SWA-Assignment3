@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { getAllGames } from "../actions/game";
 import { useEffect } from 'react';
 
-const Leaderboard = () => {
+const Scores = () => {
     const dispatch = useDispatch();
     const { isLoggedIn, user } = useSelector((state: any) => state.auth);
     const { games } = useSelector((state: any) => state.game);
@@ -32,10 +32,10 @@ const Leaderboard = () => {
         const gamesToDisaply = [];
             for(let i = 0 ; i <filteredGames.length; i++) {
                 gamesToDisaply.push(
-                    <div className="score-card"  key={"global-score" + i}>
-                        <div>Game ID: {filteredGames[i].id}</div>
-                        <div>SCORE: {filteredGames[i].score}</div>
-                        <div>USER: {filteredGames[i].user}</div>
+                    <div className="score-item"  key={"global-score" + i}>
+                        <div>Game number: {filteredGames[i].id}</div>
+                        <div>Score: {filteredGames[i].score}</div>
+                        <div>User: {filteredGames[i].user}</div>
                     </div>)
             }
             if (!gamesToDisaply.length) {
@@ -60,10 +60,10 @@ const Leaderboard = () => {
             const gamesToDisaply = [];
             for(let i = 0 ; i <filteredGames.length; i++) {
                 gamesToDisaply.push(
-                    <div className="score-card"  key={"global-score" + i}>
-                        <div>Game ID: {filteredGames[i].id}</div>
-                        <div>SCORE: {filteredGames[i].score}</div>
-                        <div>USER: {filteredGames[i].user}</div>
+                    <div className="score-item"  key={"global-score" + i}>
+                        <div>Game number: {filteredGames[i].id}</div>
+                        <div>Score: {filteredGames[i].score}</div>
+                        <div>User: {filteredGames[i].user}</div>
                     </div>)
             }
 
@@ -77,18 +77,18 @@ const Leaderboard = () => {
     }
   
     return (
-        <div className="leaderboard">
-            <div className="leaderboard-column">
-                <div className="title">Your best scores</div>
+        <div>
+            <div>
+                <h4>Your best scores</h4>
                 {showScoresFromUsers()}
             </div>
             
-            <div className="leaderboard-column">
-                <div className="title">Best scores in total</div>
+            <div>
+                <h4>Leaderboard</h4>
                 {showGlobalTopUsers()}
             </div>
         </div>
     )
 }
 
-export default Leaderboard;
+export default Scores;
